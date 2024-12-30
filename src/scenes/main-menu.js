@@ -1,3 +1,4 @@
+import { makeSonic } from "../entities/sonic";
 import { k } from "../kaplayCtx";
 
 export function MainMenu() {
@@ -22,6 +23,8 @@ export function MainMenu() {
     k.add([k.sprite("platforms"), k.pos(384, 450), k.scale(4)]),
   ];
 
+  makeSonic(k.vec2(100, 745));
+
   k.onUpdate(() => {
     if (bgPiece[1].pos.x < 0) {
       bgPiece[0].moveTo(bgPiece[1].pos.x + bgWidth * 2, 0);
@@ -31,7 +34,7 @@ export function MainMenu() {
     bgPiece[0].move(-100, 0);
     bgPiece[1].moveTo(bgPiece[0].pos.x + bgWidth * 2, 0);
 
-        const gameSpeed = 4000;
+    const gameSpeed = 4000;
     if (platforms[1].pos.x < 0) {
       platforms[0].moveTo(platforms[1].pos.x + platforms[1].width * 4, 450);
       platforms.push(platforms.shift());
