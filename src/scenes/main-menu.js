@@ -23,6 +23,18 @@ export function MainMenu() {
     k.add([k.sprite("platforms"), k.pos(384, 450), k.scale(4)]),
   ];
 
+  k.add([
+    k.text("SONIC RING RUN", { font: "mania", size: 150 }),
+    k.pos(k.center().x, 200),
+    k.anchor("center"),
+  ]);
+
+  k.add([
+    k.text("Pess space to start", { font: "mania", size: 70 }),
+    k.pos(k.center().x, k.center().y - 200),
+    k.anchor("center"),
+  ]);
+
   makeSonic(k.vec2(100, 745));
 
   k.onUpdate(() => {

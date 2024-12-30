@@ -13,6 +13,6 @@ export const k = kaplay({
         moouse:["left"],
     }
   },
-  debugKey:' 0',
+  debugKey:'0',
   debug:true
 });
