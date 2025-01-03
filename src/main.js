@@ -35,8 +35,9 @@ k.loadSound("ring", "sounds/Ring.wav");
 k.loadSound("city", "sounds/city.mp3");
 
 k.scene("main-menu", MainMenu);
-k.scene("game", MainMenu);
-k.scene("main-scene", Maingame);
+
+k.scene("game", Maingame);
+
 
 
 k.go("main-menu");

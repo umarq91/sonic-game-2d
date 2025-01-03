@@ -4,7 +4,7 @@ import { k } from "../kaplayCtx";
 export function MainMenu() {
   if (!k.getData("best-score")) k.setData("best-score", 0);
 
-  k.onButtonPress("jump", () => k.go("main-scene"));
+  k.onButtonPress("jump", () => k.go("game"));
 
   const bgWidth = 1920;
   const bgPiece = [
