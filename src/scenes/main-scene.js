@@ -22,6 +22,8 @@ export function Maingame() {
   ];
 
   const sonic = makeSonic(k.vec2(100, 745));
+  sonic.setControls();
+  sonic.setEvents();
 
   let gameSpeed = 300;
   k.loop(1, () => {
