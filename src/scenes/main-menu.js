@@ -6,7 +6,7 @@ export function MainMenu() {
 
   k.onButtonPress("jump", () => k.go("game"));
 
-  const bgWidth = 1920;
+  const bgWidth = 1280;
   const bgPiece = [
     k.add([k.sprite("chemical-bg"), k.pos(0, 0), k.scale(2), k.opacity(0.1)]),
     k.add([

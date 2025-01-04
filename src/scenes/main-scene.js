@@ -1,16 +1,17 @@
+import { makeBug } from "../entities/bug";
 import { makeSonic } from "../entities/sonic";
 import { k } from "../kaplayCtx";
 
 export function Maingame() {
   k.setGravity(3100);
 
-  const bgWidth = 1920;
+  const bgWidth = 1280;
   const bgPiece = [
-    k.add([k.sprite("chemical-bg"), k.pos(0, 0), k.scale(2), k.opacity(0.1)]),
+    k.add([k.sprite("chemical-bg"), k.pos(0, 0), k.scale(4), k.opacity(0.1)]),
     k.add([
       k.sprite("chemical-bg"),
       k.pos(bgWidth, 0),
-      k.scale(2),
+      k.scale(4),
       k.opacity(0.8),
     ]),
   ];
@@ -24,11 +25,53 @@ export function Maingame() {
   const sonic = makeSonic(k.vec2(100, 745));
   sonic.setControls();
   sonic.setEvents();
+  sonic.onCollide("enemy", (enemy) => {
+    if (!sonic.isGrounded()) {
+      k.play("destroy", { volume: 0.4 });
+      k.play("hyper-ring", { volume: 0.4 });
+      k.destroy(enemy);
+
+      // extra jump
+      sonic.play("jump");
+      sonic.jump();
+      // TODO: scoring and stuff
+      return;
+    }
+
+    k.play("hurt", { volume: 0.4 });
+    // TODO :game over 
+    k.go("game-over")
+  });
 
   let gameSpeed = 300;
   k.loop(1, () => {
     gameSpeed = Math.min(300);
   });
+
+  const swpwnBug = () => {
+    const bug = makeBug(k.vec2(1950, 773));
+
+    bug.onUpdate(() => {
+      if (gameSpeed < 3000) {
+        bug.move(-(gameSpeed + 300), 0);
+        return;
+      }
+
+      bug.move(-gameSpeed, 0);
+    });
+
+    bug.onExitScreen(() => {
+      if (bug.pos.x < 0) {
+        k.destroy(bug);
+      }
+    });
+
+    const waitTime = k.rand(0.5, 3);
+    k.wait(waitTime, () => {
+      swpwnBug();
+    });
+  };
+  swpwnBug();
 
   k.add([
     k.rect(1920, 3000),

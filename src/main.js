@@ -10,7 +10,7 @@ k.loadSprite("sonic", "graphics/sonic.png", {
   anims: {
     run: { from: 0, to: 7, loop: true, speed: 30 },
     jump: { from: 8, to: 15, loop: true, speed: 100 },
-  },
+  },  
 });
 k.loadSprite("ring", "graphics/ring.png", {
   sliceX: 16,
@@ -37,6 +37,22 @@ k.loadSound("city", "sounds/city.mp3");
 k.scene("main-menu", MainMenu);
 
 k.scene("game", Maingame);
+
+k.scene("game-over", () => {
+  k.add([
+    k.text("GAME OVER", { font: "mania", size: 150 }),
+    k.pos(k.center().x, 200),
+    k.anchor("center"),
+  ]);
+
+  k.add([
+    k.text("Press space to restart", { font: "mania", size: 70 }),
+    k.pos(k.center().x, k.center().y - 200),
+    k.anchor("center"),
+  ]);
+
+  k.onButtonPress("jump", () => k.go("game"));
+});
 
 
 

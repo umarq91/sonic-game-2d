@@ -11,7 +11,7 @@ export function makeSonic(pos) {
     k.anchor("center"),
     k.pos(pos),
     k.body({
-      jumpForce: 1300     ,
+      jumpForce: 1300,
     }),
     {
       setControls() {
