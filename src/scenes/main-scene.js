@@ -1,4 +1,5 @@
 import { makeBug } from "../entities/bug";
+import { makeRing } from "../entities/ring";
 import { makeSonic } from "../entities/sonic";
 import { k } from "../kaplayCtx";
 
@@ -33,14 +34,14 @@ export function Maingame() {
 
       // extra jump
       sonic.play("jump");
-      sonic.jump();
+      // sonic.jump();
       // TODO: scoring and stuff
       return;
     }
 
     k.play("hurt", { volume: 0.4 });
-    // TODO :game over 
-    k.go("game-over")
+    // TODO :game over
+    k.go("game-over");
   });
 
   let gameSpeed = 300;
@@ -48,7 +49,7 @@ export function Maingame() {
     gameSpeed = Math.min(300);
   });
 
-  const swpwnBug = () => {
+  const spawnBUg = () => {
     const bug = makeBug(k.vec2(1950, 773));
 
     bug.onUpdate(() => {
@@ -68,10 +69,26 @@ export function Maingame() {
 
     const waitTime = k.rand(0.5, 3);
     k.wait(waitTime, () => {
-      swpwnBug();
+      spawnBUg();
     });
   };
-  swpwnBug();
+  spawnBUg();
+
+  const spawnRing = () => {
+    // spawn ring here
+    const ring = makeRing(k.vec2(1950, 755));
+    ring.onUpdate(() => {
+      ring.move(-gameSpeed, 0);
+    });
+    ring.onExitScreen(() => {
+      if (ring.pos.x < 0) k.destroy(ring);
+    });
+
+    const waitTIme = k.rand(0.5,3);
+
+    k.wait(waitTIme,spawnRing)
+  };
+  spawnRing();
 
   k.add([
     k.rect(1920, 3000),
